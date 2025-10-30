@@ -1,27 +1,27 @@
-@import "variables"
-@import "mixins"
+@use "variables"
+@use "mixins"
 
 .main-header
     position: relative
     width: 100%
-    height: $header-height
+    height: variables.$header-height
     overflow: hidden
-    @include flex()
+    @include mixins.flex()
     flex-direction: row
     background: #FFFFFF
-    border-bottom: 1px solid $border-color-light
+    border-bottom: 1px solid variables.$border-color-light
     .container
         padding: 0 244px
         margin: 0 auto
-        @media ( max-width: $screen-small-max)
-            width: $main-content-width-s
-            height: $header-height-mob
-        @media (min-width: $screen-medium-min)
-            width: $main-content-width-m
-        @media (min-width: $screen-large-min)
-            width: $main-content-width-l
-        @media (min-width: $screen-extra-large-min)
-            width: $main-content-width-xl
+        @media ( max-width: variables.$screen-small-max)
+            width: variables.$main-content-width-s
+            height: variables.$header-height-mob
+        @media (min-width: variables.$screen-medium-min)
+            width: variables.$main-content-width-m
+        @media (min-width: variables.$screen-large-min)
+            width: variables.$main-content-width-l
+        @media (min-width: variables.$screen-extra-large-min)
+            width: variables.$main-content-width-xl
     img.main-logo
         min-width: 109.2px !important
         height: 26px
@@ -32,32 +32,32 @@
         // width: 603px
         height: 100%
         // gap: 20px
-        @include flex()
+        @include mixins.flex()
         .tab
             padding: 0px 24px
             justify-content: center
-            @include flex()
+            @include mixins.flex()
             position: relative
             text-wrap: nowrap
             cursor: pointer
             text-decoration: none
             font-size: 13px
             line-height: 19px
-            font-family: $font-family
-            color: $color-dark-gray
+            font-family: variables.$font-family
+            color: variables.$color-dark-gray
             opacity: 0.6
             &.active
-                color: $color-dark-gray
+                color: variables.$color-dark-gray
                 opacity: 1
             // &:first-of-type
-            //     border-right: 1px solid $border-color-medium
+            //     border-right: 1px solid variables.$border-color-medium
         .tab-separator
             width: 1px
             height: 12px
-            background-color: $border-color-medium
+            background-color: variables.$border-color-medium
 
 // .nav-toggle
-//     @include flex()
+//     @include mixins.flex()
 //     flex-direction: column
 //     justify-content: center
 //     align-items: center
@@ -67,7 +67,7 @@
 //     .icon-parent
 //         height: 10px
 //         width: 28px
-//         @include flex()
+//         @include mixins.flex()
 //         flex-direction: column
 //         justify-content: space-between
 //         &.x
@@ -76,7 +76,7 @@
 //         .bar
 //             height: 2px
 //             width: 100%
-//             @include themed()
+//             @include mixins.themed()
 //                 background-color: getStyle($border-color)
 //             transition: all 100ms ease-in-out
 
@@ -85,14 +85,14 @@
 //                 transform: rotate(45deg)
 //                 transform-origin: top left
 //                 width: 29px
-//                 @include themed()
+//                 @include mixins.themed()
 //                     background-color: getStyle($border-color-inverted)
 //             &.x:nth-of-type(2)
 //                 transition: all 100ms ease-in-out
 //                 transform: rotate(-45deg)
 //                 transform-origin: bottom left
 //                 width: 29px
-//                 @include themed()
+//                 @include mixins.themed()
 //                     background-color: getStyle($border-color-inverted)
 // .mob-navigation-screen
 //     position: absolute
@@ -102,7 +102,7 @@
 //     padding: 0px
 //     z-index: 0
 //     background: transparent
-//     @include flex()
+//     @include mixins.flex()
 //     align-items: center
 //     justify-content: center
 //     transition: all .2s ease

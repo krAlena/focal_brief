@@ -1,0 +1,61 @@
+@use "variables"
+@use "mixins"
+
+.analysis-content
+    overflow: auto
+    .main-info
+        width: 640px
+        // @media (min-width: variables.$screen-medium-min)
+        //     width: 570px
+        //     min-width: 570px
+        // @media (min-width: variables.$screen-large-min)
+        //     margin-right: -20px
+        h2
+            margin-top: 40px
+            margin-bottom: 20px
+        h2,
+        .description
+            @media (min-width: variables.$screen-medium-min)
+                width: 529px
+        .illustration-part-mob
+            justify-content: center
+            position: relative
+            .hightlight-spot
+                z-index: 0
+                border-radius: 100px
+                filter: blur(90px)
+                background-color: white
+                position: absolute
+                top: 0%
+                right: 25%
+                bottom: 25%
+                margin: auto
+                width: 45%
+                animation: blobani 8s infinite ease
+            img
+                height: 320px
+                width: 370px
+                margin-left: -26px
+                margin-top: 40px
+        // ul.list
+        //     margin-top: 60px
+        //     // padding-left: 29px
+        //     gap: 24px
+        //     // list-style: square
+        //     @media (max-width: variables.$screen-small-max)
+        //         margin-top: 40px
+        //     li
+        //         list-style: none
+        //         @include mixins.flex()
+        //         align-items: center
+        //         &:before
+        //             content: "·"
+        //             font-size: 85px
+        //             line-height: 28px
+        //             @include mixins.flex()
+        //             content: "·"
+        //             font-size: 85px
+        //             line-height: 26px
+        //             align-items: center
+        //             height: 28px
+        //             margin-right: 14px

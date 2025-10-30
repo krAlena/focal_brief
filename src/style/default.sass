@@ -19,6 +19,26 @@
     color: variables.$color-light-gray
 
 
+.page
+  margin-bottom: 200px
+  @media ( max-width: variables.$screen-small-max)
+    margin-bottom: 80px
+  @media (min-width: variables.$screen-medium-min)
+    margin-bottom: 120px
+  &-content
+    width: variables.$main-content-width-l
+    margin: auto
+    max-width: 100%
+    flex-wrap: wrap
+    @media ( max-width: variables.$screen-small-max)
+      width: variables.$main-content-width-s
+    @media (min-width: variables.$screen-medium-min)
+      width: variables.$main-content-width-m
+      flex-wrap: nowrap
+    @media (min-width: variables.$screen-large-min)
+      width: variables.$main-content-width-l
+    @media (min-width: variables.$screen-extra-large-min)
+      width: variables.$main-content-width-xl
 svg.icon,
 .icon
   height: variables.$icon-size
@@ -161,7 +181,8 @@ svg.icon,
   justify-content: center
 .space-between
   justify-content: space-between
-
+.flex-start
+  justify-content: flex-start
 .full-width
   width: 100%
 .half-width
