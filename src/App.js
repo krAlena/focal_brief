@@ -5,15 +5,33 @@ import "./style/AnalysisTab.sass";
 import "./style/default.sass";
 import AppHeader from './containers/AppHeader';
 import AnalysisTab from './containers/mainTabs/AnalysisTab';
+import { useEffect, useState } from "react";
+import { ANALYSIS_PAGE } from "./constants/routers";
+
 
 function App() {
+  const [currentSession, setCurrentSession] = useState(null);
+
+  useEffect(() => {
+    const handleSessionMessage = (event) => {
+      console.log("App Received message:", event.data);
+      if (event.data?.type === "FOCAL_BRIEF_EXT_SESSION") {
+        console.log("=> Session from extension:", event.data.session);
+        setCurrentSession(event.data.session);
+        window.removeEventListener("message", handleSessionMessage);
+      }
+    };
+
+    window.addEventListener("message", handleSessionMessage);
+    return () => window.removeEventListener("message", handleSessionMessage);
+  }, []);
+
   return (
     <div className="App">
       <AppHeader/>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AnalysisTab/>}/>
-          <Route path="/analysis" element={<AnalysisTab/>}/>
+          <Route path={ANALYSIS_PAGE} element={<AnalysisTab/>}/>
         </Routes>
       </BrowserRouter>
 
