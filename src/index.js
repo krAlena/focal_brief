@@ -9,6 +9,15 @@ root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
+  //  <RootProvider store={store}>
+  //   {/* <Provider instance={rollbar}>
+  //     <ErrorBoundary> */}
+  //       <BrowserRouter>
+  //           <App />
+  //       </BrowserRouter>
+  //     {/* </ErrorBoundary>
+  //   </Provider> */}
+  // </RootProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,0 +1,122 @@
+@import "variables"
+@import "mixins"
+
+.main-header
+    position: relative
+    width: 100%
+    height: $header-height
+    overflow: hidden
+    @include flex()
+    flex-direction: row
+    background: #FFFFFF
+    border-bottom: 1px solid $border-color-light
+    .container
+        padding: 0 244px
+        margin: 0 auto
+        @media ( max-width: $screen-small-max)
+            width: $main-content-width-s
+            height: $header-height-mob
+        @media (min-width: $screen-medium-min)
+            width: $main-content-width-m
+        @media (min-width: $screen-large-min)
+            width: $main-content-width-l
+        @media (min-width: $screen-extra-large-min)
+            width: $main-content-width-xl
+    img.main-logo
+        min-width: 109.2px !important
+        height: 26px
+        position: relative
+
+    .menu
+        position: relative
+        // width: 603px
+        height: 100%
+        // gap: 20px
+        @include flex()
+        .tab
+            padding: 0px 24px
+            justify-content: center
+            @include flex()
+            position: relative
+            text-wrap: nowrap
+            cursor: pointer
+            text-decoration: none
+            font-size: 13px
+            line-height: 19px
+            font-family: $font-family
+            color: $color-dark-gray
+            opacity: 0.6
+            &.active
+                color: $color-dark-gray
+                opacity: 1
+            // &:first-of-type
+            //     border-right: 1px solid $border-color-medium
+        .tab-separator
+            width: 1px
+            height: 12px
+            background-color: $border-color-medium
+
+// .nav-toggle
+//     @include flex()
+//     flex-direction: column
+//     justify-content: center
+//     align-items: center
+//     height: 52px
+//     width: 52px
+//     z-index: 9999
+//     .icon-parent
+//         height: 10px
+//         width: 28px
+//         @include flex()
+//         flex-direction: column
+//         justify-content: space-between
+//         &.x
+//             height: 22px
+//             padding-left: 4px
+//         .bar
+//             height: 2px
+//             width: 100%
+//             @include themed()
+//                 background-color: getStyle($border-color)
+//             transition: all 100ms ease-in-out
+
+//             &.x:nth-of-type(1)
+//                 transition: all 100ms ease-in-out
+//                 transform: rotate(45deg)
+//                 transform-origin: top left
+//                 width: 29px
+//                 @include themed()
+//                     background-color: getStyle($border-color-inverted)
+//             &.x:nth-of-type(2)
+//                 transition: all 100ms ease-in-out
+//                 transform: rotate(-45deg)
+//                 transform-origin: bottom left
+//                 width: 29px
+//                 @include themed()
+//                     background-color: getStyle($border-color-inverted)
+// .mob-navigation-screen
+//     position: absolute
+//     top: 0px
+//     height: 100%
+//     width: 100%
+//     padding: 0px
+//     z-index: 0
+//     background: transparent
+//     @include flex()
+//     align-items: center
+//     justify-content: center
+//     transition: all .2s ease
+//     &.visible
+//         z-index: 999
+//         background: rgba(21, 21, 21, 0.9)
+//         backdrop-filter: blur(3px)
+//     .info-col
+//         text-align: center
+//         gap: 24px
+//         .description
+//             background: transparent !important
+//     .login-block
+//         // position: absolute
+//         // bottom: 40px
+//         gap: 24px
+//         margin-top: 120px
