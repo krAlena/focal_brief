@@ -42,11 +42,12 @@ function App() {
   return (
     <div className="App">
       <AppHeader/>
-      <BrowserRouter>
+      <AnalysisTab session={currentSession}/>
+      {/* <BrowserRouter basename="/focal_brief">
         <Routes>
           <Route path={ANALYSIS_PAGE} element={<AnalysisTab session={currentSession}/>}/>
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
 
     </div>
   );
