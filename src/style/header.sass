@@ -11,7 +11,7 @@
     background: #FFFFFF
     border-bottom: 1px solid variables.$border-color-light
     .container
-        padding: 0 244px
+        // padding: 0 244px
         margin: 0 auto
         @media ( max-width: variables.$screen-small-max)
             width: variables.$main-content-width-s
@@ -46,6 +46,8 @@
             font-family: variables.$font-family
             color: variables.$color-dark-gray
             opacity: 0.6
+            &:last-of-type
+                padding-right: 0px
             &.active
                 color: variables.$color-dark-gray
                 opacity: 1

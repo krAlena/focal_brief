@@ -226,6 +226,39 @@ export async function getCategoryByDomain(siteUrl: text){
   return result;
 }
 
+export async function getUserVisitedUrls(userId: string = ""): Promise<any> {
+  let result = null;
+
+  if (userId != "") {
+    // let currentDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD;
+    // const { data, error } = await supabase.from('urls_visits').select('*').eq('user_id', userId.trim()).eq('visit_date', currentDate);
+
+    // if (error) throw error;
+    // let todayUniqueSites = data;
+    // console.log("todayUniqueSites :", todayUniqueSites);
+    // result = todayUniqueSites;
+    // get_visits_by_user_and_range(
+    //   '37f230e9-94bf-4d6a-860c-0da837f915f7',
+    //   '2025-10-29',
+    //   '2025-10-29'
+    // )
+    let currentDate = new Date().toISOString().slice(0, 10);
+    const { data, error } = await supabase.rpc('get_visits_by_user_and_range', {
+        p_user_id: userId,
+        p_start: currentDate,
+        p_end: currentDate
+    });
+    if (error) throw error;
+
+    if (isArrWithContent(data)){
+      result = data;
+      console.log('getUserVisitedUrls:  ', result)
+    }
+  }
+
+  return result;
+}
+
 //   await supabase.auth.setSession({
 //     access_token: currentSession.access_token,
 //     refresh_token: currentSession.refresh_token

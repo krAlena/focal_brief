@@ -41,6 +41,15 @@ export function addDefaultAvatar(e: React.SyntheticEvent<HTMLImageElement, Event
     e.currentTarget.src = "/avatar.png";
 }
 
+export function getFormattedValue(totalSeconds: number = 0): string {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    return [hours, minutes, seconds]
+        .map(unit => String(unit).padStart(2, '0'))
+        .join(':');
+}
+
 export type WebsiteCategory = "SocialMedia" | "News" | "Ai" | "Videos" | "Politics" | "Education" | "Other";
 
 // export function getWebsiteCategory(url: string): WebsiteCategory {

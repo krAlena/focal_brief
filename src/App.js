@@ -7,7 +7,7 @@ import AppHeader from './containers/AppHeader';
 import AnalysisTab from './containers/mainTabs/AnalysisTab';
 import { useEffect, useState } from "react";
 import { ANALYSIS_PAGE } from "./constants/routers";
-import { setSupabaseSession, getTotalDaysScanning } from "./utils/supabase.ts";
+import { setSupabaseSession, getTotalDaysScanning, getUserVisitedUrls } from "./utils/supabase.ts";
 import { isEmptyObj } from "./utils/globalFuncs.ts";
 
 
@@ -37,8 +37,6 @@ function App() {
     }
     else {
       setCurrentSession(initedSession);
-      let result = await getTotalDaysScanning(initedSession.user.id);
-      console.log("Total days scanning CHECK:", result);
     }
   }
 
@@ -47,7 +45,7 @@ function App() {
       <AppHeader/>
       <BrowserRouter>
         <Routes>
-          <Route path={ANALYSIS_PAGE} element={<AnalysisTab/>}/>
+          <Route path={ANALYSIS_PAGE} element={<AnalysisTab session={currentSession}/>}/>
         </Routes>
       </BrowserRouter>
 
