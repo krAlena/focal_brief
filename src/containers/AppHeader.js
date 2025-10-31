@@ -51,7 +51,7 @@ const AppHeader = () => {
             <div className="container main flex-row space-between center full-width">
                 <div className="left-block logo-part">
                     <img className="main-logo btn"
-                        src={'/images/logo_big.svg'}
+                        src={'images/logo_big.svg'}
                         alt="FocalBrief Logo"
                     />
                 </div>
