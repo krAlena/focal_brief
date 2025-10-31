@@ -55,18 +55,19 @@
                 .table-body
                     .table-row
                         height: 35px
+                        gap: variables.$margin-big-value
                         .table-cell
-                            margin-right: variables.$margin-half-value
-                            &.icon
-                                img
-                                    width: 16px
-                                    height: 16px
                             &.title
                                 @include mixins.flex()
                                 flex-direction: row
                                 align-items: flex-start
-                                width: 40%
+                                min-width: 30%
+                                flex-grow: 1
                                 position: relative
+                                img.favicon
+                                    margin-right: variables.$margin-half-value
+                                    width: 16px
+                                    height: 16px
                                 .site-title
                                     font-size: 13px
                                     color: variables.$color-dark-gray
@@ -76,10 +77,15 @@
                                     max-width: calc(100% - 70px)
                                 .site-category
                                     width: 70px
-                            &.visits-info
-                                font-size: 13px
+                            &.visits
+                                font-size: 12px
+                                min-width: 90px
                             &.statistics-chart
-                                font-size: 13px
+                                width: 240px
+                                .chart-bckg
+                                    height: 16px
+                                    width: 240px
+                                    background: variables.$color-light-backgrownd
     // .illustration-part
         // @media (min-width: variables.$screen-medium-min)
         //     width: 570px
