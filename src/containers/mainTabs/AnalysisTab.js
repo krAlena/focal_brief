@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ChevronDownSvgIcon from "../../components/Icons/ChevronDownSvgIcon";
-import { getUserVisitedUrls } from "../../utils/supabase.ts";
+import { getGeneralStatistics, getUserVisitedUrls } from "../../utils/supabase.ts";
 import { getFormattedValue } from "../../utils/globalFuncs.ts";
 import PeriodSelector from "../../components/common/PeriodSelector.tsx";
 
@@ -13,6 +13,7 @@ const AnalysisTab = ({session}) => {
     useEffect(() => {
         if (session?.user?.id){
             fetchUserVisitedUrls(session?.user?.id, selectedPeriod);
+            fetchGeneralStats(session?.user?.id);
             setCurrentUser(session.user);
         }
 
@@ -21,6 +22,12 @@ const AnalysisTab = ({session}) => {
         // }
     }, [session])
 
+    async function fetchGeneralStats(userId){
+        if (userId) {
+            let generalStatistics = await getGeneralStatistics(userId);
+            console.log("General statistics:", generalStatistics);
+        }
+    }
     async function fetchUserVisitedUrls(userId, selectedPeriod){
         if (userId) {
             let selectedDatesRange = getPeriodDateRange(selectedPeriod);
