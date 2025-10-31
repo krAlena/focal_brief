@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/focal_brief/static/css/main.c67dca1e.css",
+    "main.js": "/focal_brief/static/js/main.b6378dd2.js",
+    "static/js/453.b9e541aa.chunk.js": "/focal_brief/static/js/453.b9e541aa.chunk.js",
+    "index.html": "/focal_brief/index.html",
+    "main.c67dca1e.css.map": "/focal_brief/static/css/main.c67dca1e.css.map",
+    "main.b6378dd2.js.map": "/focal_brief/static/js/main.b6378dd2.js.map",
+    "453.b9e541aa.chunk.js.map": "/focal_brief/static/js/453.b9e541aa.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c67dca1e.css",
+    "static/js/main.b6378dd2.js"
+  ]
+}
