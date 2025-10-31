@@ -226,7 +226,7 @@ export async function getCategoryByDomain(siteUrl: text){
   return result;
 }
 
-export async function getUserVisitedUrls(userId: string = ""): Promise<any> {
+export async function getUserVisitedUrls(userId: string = "", periodStart: string, periodEnd: string): Promise<any> {
   let result = null;
 
   if (userId != "") {
@@ -242,11 +242,10 @@ export async function getUserVisitedUrls(userId: string = ""): Promise<any> {
     //   '2025-10-29',
     //   '2025-10-29'
     // )
-    let currentDate = new Date().toISOString().slice(0, 10);
     const { data, error } = await supabase.rpc('get_visits_by_user_and_range', {
         p_user_id: userId,
-        p_start: currentDate,
-        p_end: currentDate
+        p_start: periodStart,
+        p_end: periodEnd
     });
     if (error) throw error;
 
