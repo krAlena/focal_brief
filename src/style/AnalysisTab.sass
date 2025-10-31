@@ -5,6 +5,7 @@
     overflow: auto
     .main-info
         width: 640px
+        max-width: 100%
         .toolbar
             padding: variables.$padding-big-value 0px
             margin-top: 24px
@@ -27,6 +28,10 @@
             width: 100%
             border-top: 1px solid variables.$border-color-light
             border-bottom: 1px solid variables.$border-color-light
+            max-width: 100%
+            flex-wrap: wrap
+            @media (max-width: variables.$screen-small-max)
+                padding-bottom: 0px
             .statistic-block
                 width: 136px
                 .key
@@ -39,6 +44,9 @@
                     line-height: 27px
                     font-weight: variables.$font-weight-bold
                     color: variables.$color-dark-gray
+                @media (max-width: variables.$screen-small-max)
+                    width: 50%
+                    margin-bottom: 16px
             .cols-separator
                 width: 1px
                 min-width: 1px
@@ -46,6 +54,8 @@
                 background-color: variables.$border-color-light
                 margin-left: 15.5px
                 margin-right: 15.5px
+                @media (max-width: variables.$screen-small-max)
+                    display: none
         .visits-info
             margin-top: 32px
             .table

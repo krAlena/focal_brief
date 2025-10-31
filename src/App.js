@@ -16,6 +16,7 @@ function App() {
 
   useEffect(() => {
     const handleSessionMessage = (event) => {
+      console.log("App Received message:", event.data);
       if (event.data?.type === "FOCAL_BRIEF_EXT_SESSION") {
         console.log("=> Session from extension:", event.data.session);
         if (!isEmptyObj(event.data.session)){
@@ -42,12 +43,11 @@ function App() {
   return (
     <div className="App">
       <AppHeader/>
-      <AnalysisTab session={currentSession}/>
-      {/* <BrowserRouter basename="/focal_brief">
+      <BrowserRouter basename="/focal_brief">
         <Routes>
           <Route path={ANALYSIS_PAGE} element={<AnalysisTab session={currentSession}/>}/>
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
 
     </div>
   );

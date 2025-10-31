@@ -20,9 +20,10 @@ const periods: Period[] = [
   { key: "all", label: "All Time" }
 ];
 
-const PeriodSelector: React.FC<PeriodSelectorProps> = ({ onChange, defPeriod }) => {
+const PeriodSelector: React.FC<PeriodSelectorProps> = ({ onChange }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedPeriod, setSelectedPeriod] = useState<string>(defPeriod || "yesterday");
+  // let defaultPeriod = periods[0];
+  const [selectedPeriod, setSelectedPeriod] = useState({ key: "today", label: "Today" });
 
   // useEffect(() => {
   //   const browserLang = navigator.language || (navigator as any).userLanguage;
@@ -39,22 +40,22 @@ const PeriodSelector: React.FC<PeriodSelectorProps> = ({ onChange, defPeriod }) 
 //     onChange?.(value);
 //   };
 
-  const handleChange = (newValue) => {
-    setSelectedPeriod(newValue);
-    // onChange?.(value);
+  const handleChange = (period) => {
+    setSelectedPeriod(period);
+    onChange?.(period.key);
     setIsOpen(false);
   };
 
   return (
     <div className={styles["dropdown-wrapper"]}>
         <div className={styles["dropdown-btn"]} onClick={() => setIsOpen(!isOpen)}>
-            {selectedPeriod}
+            {selectedPeriod.label}
             <ChevronDownSvgIcon className="icon without-margin"/>
         </div>
         {isOpen && (
             <ul className={`${styles["dropdown-menu"]} description`}>
                 {periods.map(period => (
-                    <li key={period.key} className="flex-row center flex-start description light" value={period.key} onClick={e => handleChange(period.key)}>
+                    <li key={period.key} className="flex-row center flex-start description light" value={period.key} onClick={e => handleChange(period)}>
                         {period.label}
                     </li>
                 ))}

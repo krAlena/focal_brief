@@ -129,6 +129,24 @@ export async function getTotalDaysScanning(userId: string) {
 }
 
 
+export async function getGeneralStatisticsNew(userId: string): Promise<any> {
+    let result = null;
+    let currentDate = new Date().toISOString().slice(0, 10);
+    const { data, error } = await supabase.rpc('get_scans_statistics_with_duration', {
+        p_user_id: userId,
+        p_check_date:  currentDate
+    });
+
+    if (error) throw error;
+
+    if (isArrWithContent(data)){
+      result = data[0];
+    }
+
+    console.log('getGeneralStatisticsNew: ', result)
+    return result;
+}
+
 export async function getGeneralStatistics(userId: string): Promise<GeneralStatistis> {
     let result: GeneralStatistis = {todaySitesVisited: 1, allSitesVisited: 1};
     let currentDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD;
@@ -226,7 +244,7 @@ export async function getCategoryByDomain(siteUrl: text){
   return result;
 }
 
-export async function getUserVisitedUrls(userId: string = "", periodStart: string, periodEnd: string): Promise<any> {
+export async function getUserVisitedUrls(userId: string = "", periodStart: string | null, periodEnd: string | null): Promise<any> {
   let result = null;
 
   if (userId != "") {

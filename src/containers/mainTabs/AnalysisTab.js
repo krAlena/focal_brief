@@ -1,14 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChevronDownSvgIcon from "../../components/Icons/ChevronDownSvgIcon";
-import { getGeneralStatistics, getUserVisitedUrls } from "../../utils/supabase.ts";
+import { getGeneralStatistics, getGeneralStatisticsNew, getUserVisitedUrls } from "../../utils/supabase.ts";
 import { getFormattedValue } from "../../utils/globalFuncs.ts";
 import PeriodSelector from "../../components/common/PeriodSelector.tsx";
+import { TimerTracker } from "../../components/common/TimerTracker.tsx";
 
 const AnalysisTab = ({session}) => {
 
     const [arrUserVisitedUrls, setArrUserVisitedUrls] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
     const [selectedPeriod, setSelectedPeriod] = useState("today");
+    const [generalStatistics, setGeneralStatistics] = useState(null);
+    const timerRef = useRef(null);
+    const intervalRef = useRef(null);
+    const [formattedTime, setFormattedTime] = useState("00:00:00");
 
     useEffect(() => {
         if (session?.user?.id){
@@ -23,16 +28,45 @@ const AnalysisTab = ({session}) => {
     }, [session])
 
     async function fetchGeneralStats(userId){
+        console.log("fetchGeneralStats general stats for user:", userId);
+        console.log("session:", session);
         if (userId) {
-            let generalStatistics = await getGeneralStatistics(userId);
-            console.log("General statistics:", generalStatistics);
+            let generalStats = await getGeneralStatisticsNew(userId);
+            // daily_duration
+            // daily_unique_urls
+            // total_duration
+            // total_unique_urls
+            if (generalStats?.total_duration){
+                runTimer(generalStats.total_duration);
+            }
+            console.log("General statistics NEW:", generalStats);
+            setGeneralStatistics(generalStats);
         }
     }
+
+    function runTimer(initialSeconds) {
+        console.log('runTimer initialSeconds:', initialSeconds);
+        if (timerRef.current) {
+            timerRef.current.stop();
+            timerRef.current = null;
+        }
+        initialSeconds = Math.floor((initialSeconds || 0));
+        timerRef.current = new TimerTracker({ initialSeconds });
+        timerRef.current.start();
+
+        if (intervalRef.current) clearInterval(intervalRef.current);
+            intervalRef.current = setInterval(() => {
+            if (timerRef.current) {
+                setFormattedTime(timerRef.current.getFormattedValue());
+            }
+        }, 1000);
+    }
+
     async function fetchUserVisitedUrls(userId, selectedPeriod){
         if (userId) {
             let selectedDatesRange = getPeriodDateRange(selectedPeriod);
-            let startDate = selectedDatesRange.startDate.toISOString().slice(0, 10);
-            let endDate = selectedDatesRange.endDate.toISOString().slice(0, 10);
+            let startDate = selectedDatesRange.startDate?.toISOString().slice(0, 10) || "1970-01-01";
+            let endDate = selectedDatesRange.endDate?.toISOString().slice(0, 10);
 
             let result = await getUserVisitedUrls(userId, startDate, endDate);
             setArrUserVisitedUrls(result);
@@ -60,7 +94,7 @@ const AnalysisTab = ({session}) => {
                 break;
             case "all":
                 startDate = null;
-                endDate = null;
+                // endDate = null;
                 break;
             default:
                 // default to today
@@ -72,6 +106,8 @@ const AnalysisTab = ({session}) => {
 
     const handlePeriodChange = (periodKey) => {
         setSelectedPeriod(periodKey);
+        console.log('session user id:', currentUser?.id);
+        
         if (currentUser?.id){
             fetchUserVisitedUrls(currentUser?.id, periodKey);
         }
@@ -90,7 +126,7 @@ const AnalysisTab = ({session}) => {
                     <div className="stastistics-table flex-row space-between center">
                         <div className="statistic-block">
                             <div className="key">Sites Scanned</div>
-                            <div className="value">165</div>
+                            <div className="value">{generalStatistics?.total_unique_urls || 0}</div>
                         </div>
                         <div className="cols-separator"></div>
                         <div className="statistic-block">
@@ -100,12 +136,12 @@ const AnalysisTab = ({session}) => {
                         <div className="cols-separator"></div>
                         <div className="statistic-block">
                             <div className="key">Times Spent</div>
-                            <div className="value">02:30:00</div>
+                            <div className="value">{formattedTime}</div>
                         </div>
                         <div className="cols-separator"></div>
                         <div className="statistic-block">
                             <div className="key">News Scanned</div>
-                            <div className="value">500</div>
+                            <div className="value">0</div>
                         </div>
                     </div>
 
