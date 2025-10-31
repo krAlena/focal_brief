@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../styles/Avatar.module.sass';
+import styles from '../../style/Avatar.module.sass';
 import { isEmptyObj, addDefaultAvatar } from '../../public/utils/globalFuncs.ts';
 
 interface AvatarProps {

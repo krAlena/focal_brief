@@ -16,7 +16,6 @@ function App() {
 
   useEffect(() => {
     const handleSessionMessage = (event) => {
-      console.log("App Received message:", event.data);
       if (event.data?.type === "FOCAL_BRIEF_EXT_SESSION") {
         console.log("=> Session from extension:", event.data.session);
         if (!isEmptyObj(event.data.session)){
